@@ -1,0 +1,22 @@
+<div class="container my-5">
+
+    <table  table class="table table-striped">
+       <thead>
+        <th>Project</th>
+        <th>Start</th>
+        <th>Stop</th>
+        <th>Duration</th>
+       </thead>
+       <tbody>
+        <tr *ngFor="let project of projects">
+            <td>{{project.projectName}}</td>
+            <td>{{displayDateInCorrectFormat(project.start)}}</td>
+            <td *ngIf="isEqualToDefaultDate(project.stop)">...</td>
+            <td *ngIf="!isEqualToDefaultDate(project.stop)">{{displayDateInCorrectFormat(project.stop)}}</td>
+            <td *ngIf="isEqualToDefaultDate(project.duration)">...</td>
+            <td *ngIf="!isEqualToDefaultDate(project.duration)">{{displayDurationInCorrectFormat(project.duration)}}</td>
+        </tr>
+       </tbody>
+    </table>
+
+</div>

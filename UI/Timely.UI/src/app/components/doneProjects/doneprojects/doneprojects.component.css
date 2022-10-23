@@ -1,0 +1,10 @@
+.container-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    --bs-btn-padding-x: 60px;
+    --bs-btn-border-radius: 1rem;
+}
