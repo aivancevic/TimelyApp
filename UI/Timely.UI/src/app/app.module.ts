@@ -14,6 +14,9 @@ import { DoneprojectsComponent } from './components/doneProjects/doneprojects/do
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { StopTimerComponent } from './components/stopTimer/stop-timer/stop-timer.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table'  
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,9 @@ import { StopTimerComponent } from './components/stopTimer/stop-timer/stop-timer
     MatFormFieldModule,
     MatInputModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

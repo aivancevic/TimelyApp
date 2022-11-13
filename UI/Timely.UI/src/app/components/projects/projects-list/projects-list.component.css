@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+    vertical-align: middle;
+  }
+
+  .header{
+    font-size: medium;
+    color: black;
+    padding-bottom: 10px;
+  }
+
+.delete{
+  font-size: 0.9rem;
+  padding: 0.5rem;
+}

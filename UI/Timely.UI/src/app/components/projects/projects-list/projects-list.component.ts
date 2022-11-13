@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {Project} from 'src/app/models/TimelyModel';
-import {MatDialog, MatDialogRef, MatDialogState, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DialogComponent } from '../../modalDialog/dialog/dialog.component';
 import { ProjectsService } from 'src/app/services/projects.service';
+import { Router } from '@angular/router';
+
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'app-projects-list',
@@ -10,32 +12,45 @@ import { ProjectsService } from 'src/app/services/projects.service';
   styleUrls: ['./projects-list.component.css']
 })
 export class ProjectsListComponent implements OnInit {
-
-
+  
   projects : Project[];
 
-  constructor(private projectsService: ProjectsService){
+  dataSource: any;
+  displayedColumns: string[] = [
+    'projectName',
+    'start',
+    'stop',
+    'duration',
+    'id'
+  ];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private projectsService: ProjectsService, private router: Router){
 
   }
+
   ngOnInit(): void {
-    this.projectsService.GetProjects()
+    this.projectsService.getProjects()
     .subscribe({
       next: (projects) => {
         this.projects = <Project[]>projects;
+        console.log(this.projects)
+        this.dataSource = new MatTableDataSource<Project>(this.projects);
+        this.dataSource.paginator = this.paginator;
       },
       error: (response) => {
         alert(response + "\nCan't get projects")
       }
     });
-
   }
 
-  isEqualToDefaultDate(dateToComapre: Date){
+  isEqualToDefaultDate(dateToCompare: Date){
     var defaultDate = new Date(0,0,0);
     defaultDate.setDate(30);
     defaultDate.setHours(23);
-    dateToComapre = new Date(dateToComapre);
-    if(dateToComapre.getTime() === defaultDate.getTime())
+    dateToCompare = new Date(dateToCompare);
+    if(dateToCompare.getTime() === defaultDate.getTime())
       return true
     else
       return false
@@ -49,5 +64,14 @@ export class ProjectsListComponent implements OnInit {
   displayDurationInCorrectFormat(dateToFormat: Date){
     var dateFormatString = new Date(dateToFormat).toISOString().substr(14,5);
     return dateFormatString
+  }
+
+  deleteProject(id:string){
+    this.projectsService.deleteProject(id).subscribe({
+      next:(response) => {
+        location.reload();
+        this.router.navigate(['doneProjects']);
+      }
+    });
   }
 }

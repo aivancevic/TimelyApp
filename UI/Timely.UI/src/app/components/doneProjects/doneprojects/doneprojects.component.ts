@@ -12,7 +12,7 @@ export class DoneprojectsComponent implements OnInit {
   constructor(private projectsService: ProjectsService) { }
 
   ngOnInit(): void {
-    this.projectsService.GetProjects()
+    this.projectsService.getProjects()
     .subscribe({
       next: (projects) => {
         this.projects = <Project[]>projects;

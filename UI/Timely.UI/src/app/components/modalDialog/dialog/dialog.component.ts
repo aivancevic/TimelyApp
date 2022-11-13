@@ -22,7 +22,7 @@ export class DialogComponent implements OnInit {
     duration: new Date(0,0,0)
   };
 
-  constructor(private route: ActivatedRoute, 
+  constructor(
     private projectsService: ProjectsService, 
     private router: Router, 
     public dialogRef: MatDialogRef<DialogComponent>,
@@ -31,7 +31,7 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     const proj = this.projectsService.getSavedProjectId()
-    this.projectsService.GetProjectById(proj.id).subscribe({
+    this.projectsService.getProjectById(proj.id).subscribe({
       next: (response) =>{
         this.projectDetail = response;
         this.projectDetail.id = response.id;
@@ -46,8 +46,8 @@ export class DialogComponent implements OnInit {
     var seconds = this.timeDifference(startSec, endSec);
     const dateSeconds = new Date(seconds)
     this.projectDetail.duration = dateSeconds;
-    this.projectsService.UpdateProject(this.projectDetail.id, this.projectDetail).subscribe({
-      next: (response) =>{
+    this.projectsService.updateProject(this.projectDetail.id, this.projectDetail).subscribe({
+      next: () =>{
         this.router.navigate(['doneProjects']);
       }
     })

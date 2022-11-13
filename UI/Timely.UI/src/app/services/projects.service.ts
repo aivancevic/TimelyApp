@@ -15,26 +15,30 @@ export class ProjectsService {
   
   constructor(private http: HttpClient) { }
 
-  GetProjects(): Observable<Project[]>{
+  getProjects(): Observable<Project[]>{
      return this.http.get<Project[]>(this.baseApiUrl + '/api/Timely');
   }
 
-  GetProjectById(id: string):Observable<Project>{
+  getProjectById(id: string):Observable<Project>{
     return this.http.get<Project>(this.baseApiUrl + '/api/Timely/' + id);
  }
 
-  GetProjectLatestDate(): Observable<Project>{
+  getProjectLatestDate(): Observable<Project>{
     return this.http.get<Project>(this.baseApiUrl + '/api/Timely/latestDate');
  }
 
-  AddProject(addProjectRequest: Project) : Observable<Project>{
+  addProject(addProjectRequest: Project) : Observable<Project>{
     addProjectRequest.id = '00000000-0000-0000-0000-000000000000';
     return this.http.post<Project>(this.baseApiUrl + '/api/Timely', addProjectRequest);
   }
 
 
-  UpdateProject(id: string, updateProjectRequest: Project): Observable<Project>{
+  updateProject(id: string, updateProjectRequest: Project): Observable<Project>{
     return this.http.put<Project>(this.baseApiUrl + '/api/Timely/' + id, updateProjectRequest);
+  }
+
+  deleteProject(id: string):Observable<Project>{
+   return this.http.delete<Project>(this.baseApiUrl + '/api/Timely/delete/' + id);
   }
 
   saveProjectId(project: Project) {

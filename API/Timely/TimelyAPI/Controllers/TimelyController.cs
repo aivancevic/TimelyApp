@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using TimelyAPI.Data;
 using TimelyAPI.Models;
 
@@ -26,7 +25,7 @@ namespace TimelyAPI.Controllers
           return Ok(timelies);
         }
 
-        //Get all projects Route: api/Timely/latestDate
+        //Get project Route: api/Timely/latestDate
         [HttpGet]
         [Route("latestDate")]
         [ActionName("GetProjectLatestDate")]
@@ -85,7 +84,7 @@ namespace TimelyAPI.Controllers
 
         //Delete project
         [HttpDelete]
-        [Route("{id:guid}")]
+        [Route("delete/{id:guid}")]
 
         public async Task<IActionResult> DeleteProject([FromRoute] Guid id)
         {

@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { DialogComponent } from '../../modalDialog/dialog/dialog.component';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { Project } from 'src/app/models/TimelyModel';
@@ -19,7 +18,7 @@ export class StopTimerComponent implements OnInit {
 
   projects : Project;
 
-  constructor(private dialog : MatDialog, private router: Router, private projectsService: ProjectsService){
+  constructor(private dialog : MatDialog, private projectsService: ProjectsService){
     
   }
 
@@ -29,7 +28,7 @@ export class StopTimerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectsService.GetProjectLatestDate()
+    this.projectsService.getProjectLatestDate()
       .subscribe({
         next: (project) => {
           this.projectsService.saveProjectId(project);

@@ -19,14 +19,12 @@ export class HomePageComponent implements OnInit {
   constructor(private projectsService: ProjectsService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log(new Date(Date.now()));
   }
 
     addProject(){
-      console.log(this.addProjectRequest);
-      this.projectsService.AddProject(this.addProjectRequest)
+      this.projectsService.addProject(this.addProjectRequest)
       .subscribe({
-        next: (projects) => {
+        next: () => {
           this.router.navigate(['start'])
         },
         error: (response) => {
